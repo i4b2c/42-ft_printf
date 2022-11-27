@@ -13,9 +13,26 @@ void	ft_putunbr_fd(unsigned int i, int fd)
 	ft_putunbr_fd(i % 10 , fd);
 }
 
+void	ft_hexa(int n)
+{
+	char str[16] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+
+	ft_putchar_fd(str[n / 16],1);
+	ft_putchar_fd(str[n % 16],1);
+}
+
+void	ft_uphexa(int n)
+{
+	char str[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+	ft_putchar_fd(str[n / 16],1);
+	ft_putchar_fd(str[n % 16],1);
+}
+
 int ft_printf(char *str, ...)
 {
 	int i;
+	int h;
 	char c;
 	char *s;
 	int nb;
@@ -49,6 +66,16 @@ int ft_printf(char *str, ...)
 				unb = va_arg(args, unsigned int);
 				ft_putunbr_fd(unb,1);
 			}
+			if (str[i] == 'x')
+			{
+				h = va_arg(args, int);
+				ft_hexa(h);
+			}
+			if (str[i] == 'X')
+			{
+				h = va_arg(args , int);
+				ft_uphexa(h);
+			}
 			if (str[i] == '%')
 				ft_putchar_fd('%',1);
 
@@ -66,9 +93,10 @@ int ft_printf(char *str, ...)
 /*
 int main(void)
 {
-	char str = 'a';
+	char a = 126;
 
-	printf("%p",&str);
+	ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
 	return 0;
 
 }*/
