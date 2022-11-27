@@ -29,15 +29,57 @@ void	ft_uphexa(int n)
 	ft_putchar_fd(str[n % 16],1);
 }
 
+int	print_n_cont(va_list args, char ch)
+{
+	int n;
+	unsigned int un;
+	char *s;
+
+	if(ch == 'c')
+	{
+		n = va_arg(args, int);
+		ft_putchar_fd((char)n,1);
+		return (1);
+	}
+	else if (ch == 's')
+	{
+		s = va_arg(args, char *);
+		ft_putstr_fd(s,1);
+		return (ft_strlen(s));
+	}
+	else if (ch == 'i' || ch == 'd')
+	{
+		n = va_arg(args, int);
+		ft_putnbr_fd(n,1);
+		return (ft_strlen(ft_itoa(n)));
+	}
+	else if (ch == 'u')
+	{
+		un = va_arg(args, unsigned int);
+		ft_putunbr_fd(un,1);
+		return (ft_strlen(ft_itoa(n)));
+	}
+	else if (ch == 'x')
+	{
+		n = va_arg(args, int);
+		ft_hexa(n);
+		return (2);
+	}
+	else if (ch == 'X')
+	{
+		n = va_arg(args, int);
+		ft_uphexa(n);
+		return (2);
+	}
+	else
+		ft_putchar_fd('%',1);
+	return (1);
+}
+
 int ft_printf(char *str, ...)
 {
 	int i;
-	int h;
-	char c;
-	char *s;
-	int nb;
 	va_list args;
-	unsigned int unb;
 	int contagem;
 
 	i = 0;
@@ -47,49 +89,8 @@ int ft_printf(char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			i++;
-			if (str[i] == 'c')
-			{
-				c = va_arg(args, int);
-				ft_putchar_fd(c,1);
-				contagem++;
-			}
-			if (str[i] == 's')
-			{
-				s = va_arg(args, char *);
-				ft_putstr_fd(s,1);
-				contagem += ft_strlen(s);
-			}
-			if (str[i] == 'd' || str[i] == 'i')
-			{
-				nb = va_arg(args, int);
-				ft_putnbr_fd(nb,1);
-				contagem += ft_strlen(ft_itoa(nb));
-			}
-			if (str[i] == 'u')
-			{
-				unb = va_arg(args, unsigned int);
-				ft_putunbr_fd(unb,1);
-				contagem += ft_strlen(ft_itoa(nb));
-			}
-			if (str[i] == 'x')
-			{
-				h = va_arg(args, int);
-				ft_hexa(h);
-				contagem += 2;
-			}
-			if (str[i] == 'X')
-			{
-				h = va_arg(args , int);
-				ft_uphexa(h);
-				contagem += 2;
-			}
-			if (str[i] == '%')
-			{
-				ft_putchar_fd('%',1);
-				contagem++;
-			}
-			i++;
+			contagem += print_n_cont(args,str[i+1]);
+			i += 2;
 		}
 		else
 		{
@@ -107,10 +108,7 @@ int main(void)
 	char a = 126;
 	int i;
 
-	i = printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
-	ft_printf("quantidade de letras: %d\n",i);
-	i = 0;
-	i = ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	i = ft_printf(" %s\n","boas");
 	ft_printf("quantidade de letras: %d\n",i);
 	return 0;
 
