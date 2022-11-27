@@ -96,7 +96,7 @@ int main(void)
 	char a = 126;
 
 	ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
-	ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
 	return 0;
 
 }*/
