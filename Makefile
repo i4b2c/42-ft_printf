@@ -47,7 +47,7 @@ CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
-EXTRA = a.out
+EXTRA = a.out libft/a.out
 
 OBJ = $(SRC:%.c=%.o)
 

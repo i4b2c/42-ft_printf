@@ -38,8 +38,10 @@ int ft_printf(char *str, ...)
 	int nb;
 	va_list args;
 	unsigned int unb;
+	int contagem;
 
 	i = 0;
+	contagem = 0;
 	va_start(args,str);
 	while(str[i])
 	{
@@ -50,53 +52,66 @@ int ft_printf(char *str, ...)
 			{
 				c = va_arg(args, int);
 				ft_putchar_fd(c,1);
+				contagem++;
 			}
 			if (str[i] == 's')
 			{
 				s = va_arg(args, char *);
 				ft_putstr_fd(s,1);
+				contagem += ft_strlen(s);
 			}
 			if (str[i] == 'd' || str[i] == 'i')
 			{
 				nb = va_arg(args, int);
 				ft_putnbr_fd(nb,1);
+				contagem += ft_strlen(ft_itoa(nb));
 			}
 			if (str[i] == 'u')
 			{
 				unb = va_arg(args, unsigned int);
 				ft_putunbr_fd(unb,1);
+				contagem += ft_strlen(ft_itoa(nb));
 			}
 			if (str[i] == 'x')
 			{
 				h = va_arg(args, int);
 				ft_hexa(h);
+				contagem += 2;
 			}
 			if (str[i] == 'X')
 			{
 				h = va_arg(args , int);
 				ft_uphexa(h);
+				contagem += 2;
 			}
 			if (str[i] == '%')
+			{
 				ft_putchar_fd('%',1);
-
+				contagem++;
+			}
 			i++;
 		}
 		else
 		{
 			ft_putchar_fd(str[i],1);
 			i++;
+			contagem++;
 		}
 	}
 	va_end(args);
-	return (0);
+	return (contagem);
 }
 /*
 int main(void)
 {
 	char a = 126;
+	int i;
 
-	ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
-	printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	i = printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	ft_printf("quantidade de letras: %d\n",i);
+	i = 0;
+	i = ft_printf("%c%s%d%i%u%x%X%%\n",'o',"i como vai ? ->",5,5,5,126,126);
+	ft_printf("quantidade de letras: %d\n",i);
 	return 0;
 
 }*/
