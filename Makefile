@@ -42,6 +42,9 @@ SRC = libft/ft_isalpha.c \
       libft/ft_lstclear.c \
       libft/ft_lstiter.c \
       libft/ft_lstmap.c \
+      ft_printf_utils1.c \
+      ft_printf_utils2.c \
+      len.c \
       ft_printf.c
 
 CC = cc
