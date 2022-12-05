@@ -6,7 +6,7 @@
 /*   By: icaldas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 12:23:11 by icaldas           #+#    #+#             */
-/*   Updated: 2022/12/05 12:25:05 by icaldas          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:58:33 by icaldas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_lenhexa(unsigned int n)
 
 int	ptrlen(void *p)
 {
-	int		i;
+	int			i;
 	uintptr_t	c;
 
 	c = (uintptr_t)p;
